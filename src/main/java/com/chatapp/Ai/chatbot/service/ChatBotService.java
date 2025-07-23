@@ -16,35 +16,21 @@ public class ChatBotService {
 	private String apiKey="AIzaSyB-bnwXpnlzxxA_uONO4uqrEOSZFdusFY0";
 	
 	private final WebClient webClient = WebClient.builder()
-			   .baseUrl("https://generativelanguage.googleapis.com/v1beta")
-	            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-	            .defaultHeader("X-goog-api-key", apiKey)
-	            .build();
+		.baseUrl("https://generativelanguage.googleapis.com/v1beta")
+	        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+	        .defaultHeader("X-goog-api-key", apiKey)
+	        .build();
 
 
 	public String getResponseFromAi(String userMessage) {
 	
-//
-//String requestBody = """
-//{
-//  "contents": [
-//    {
-//      "role": "user",
-//      "parts": [
-//        {
-//          "text": "Explain how AI works in a few words"
-//        }
-//      ]
-//    }
-//  ]
-//}
-//""";		  // Build the request DTO
-	    Part part = new Part(userMessage);
-	    Content content = new Content("user", List.of(part));
-	    GeminiRequest requestDto = new GeminiRequest(List.of(content));
+	 // Build the request DTO
+	    	Part part = new Part(userMessage);
+	   	Content content = new Content("user", List.of(part));
+	    	GeminiRequest requestDto = new GeminiRequest(List.of(content));
 
-	     String response = webClient.post()
-	    	     	.uri("/models/gemini-2.0-flash:generateContent?key=" + apiKey)
+	     	String response = webClient.post()
+	    		.uri("/models/gemini-2.0-flash:generateContent?key=" + apiKey)
 	                .bodyValue(requestDto)
 	                .retrieve()
 	                .bodyToMono(String.class)
