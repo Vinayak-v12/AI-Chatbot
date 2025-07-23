@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/styles.css}">
+<title>mychatapp</title>
+</head>
+
+<body>
+	<header>
+		  <h1>🤖 AI ChatBot</h1>
+	</header>
+<div id="container1">
+	<div class="container">
+		<form action="/fromuser" method="post">
+		<h3>What's on your mind today?</h3>
+		<textarea name="user_msg"placeholder="Ask anything"></textarea>
+		<br>
+		<button type="submit">post</button>
+		</form>
+	</div>	
+		<div class="reply">
+			<section>
+				  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" alt="Robot Avatar" class="bot-avatar">
+			<h3>Response from AI:</h3>
+			<div id="reply1">
+        	<p th:text="${reply}"></p>
+        	</div>
+			<br>
+			<h3>Waiting for your reply....</h3>
+			</section>
+    	</div>
+</div>
+<footer>
+	<div id="footer">
+    <p>🤖 AI ChatBot | Powered by Gemini</p>
+    <p>Built with ❤️ by Vinayak • <a href="https://ai.google.dev/" target="_blank">Gemini api</a></p>
+    <p>v1.0 • Last updated: July 2025</p>
+	</div>
+</footer>
+</body>
+</html>
