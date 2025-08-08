@@ -12,8 +12,8 @@ import com.chatapp.Ai.chatbot.dto.Part;
 @Service
 public class ChatBotService {
 
-
-	private String apiKey="AIzaSyB-bnwXpnlzxxA_uONO4uqrEOSZFdusFY0";
+	@Value("${gemini.api.key}")
+	private String apiKey;
 	
 	private final WebClient webClient = WebClient.builder()
 		.baseUrl("https://generativelanguage.googleapis.com/v1beta")
