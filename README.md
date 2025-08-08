@@ -27,5 +27,4 @@ An intelligent, real-time AI chatbot built using **Spring Boot** and **Google Ge
 
 ---
 
-## 📁 Project Structure
 
