@@ -13,17 +13,23 @@ import com.chatapp.Ai.chatbot.dto.Part;
 @Service
 public class ChatBotService {
 	
-
-    private final WebClient webClient;
+	private final WebClient webClient;
     private final String apiKey;
 
-    public ChatBotService(@Value("${gemini.api.key}") String apiKey) {
-        this.apiKey = apiKey;
+    public ChatBotService() {
+    	
+        this.apiKey = System.getenv("THIRD_PARTY_API_KEY");
+        
+
+        if (this.apiKey == null || this.apiKey.isEmpty()) {
+            throw new IllegalStateException("THIRD_PARTY_API_KEY environment variable is missing!");
+        }
+
         this.webClient = WebClient.builder()
-            .baseUrl("https://generativelanguage.googleapis.com/v1beta")
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-            .defaultHeader("X-goog-api-key", apiKey)
-            .build();
+                .baseUrl("https://generativelanguage.googleapis.com/v1beta")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader("X-goog-api-key", apiKey)
+                .build();
     }
 
 	
