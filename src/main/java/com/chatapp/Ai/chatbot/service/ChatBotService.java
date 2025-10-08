@@ -12,16 +12,21 @@ import com.chatapp.Ai.chatbot.dto.Part;
 
 @Service
 public class ChatBotService {
-
-	@Value("${gemini.api.key}")
-	private String apiKey;
 	
-	private final WebClient webClient = WebClient.builder()
-		.baseUrl("https://generativelanguage.googleapis.com/v1beta")
-	        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-	        .defaultHeader("X-goog-api-key", apiKey)
-	        .build();
 
+    private final WebClient webClient;
+    private final String apiKey;
+
+    public ChatBotService(@Value("${gemini.api.key}") String apiKey) {
+        this.apiKey = apiKey;
+        this.webClient = WebClient.builder()
+            .baseUrl("https://generativelanguage.googleapis.com/v1beta")
+            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .defaultHeader("X-goog-api-key", apiKey)
+            .build();
+    }
+
+	
 
 	public String getResponseFromAi(String userMessage) {
 	
